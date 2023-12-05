@@ -78,9 +78,7 @@ export const Profile = () => {
       setErrors({});
     }
   };
-  const handleChange = (e) => {
-    setForm({[e.target.name]: e.target.value});
-  };
+
   const handleEdit = async () => {
     setIsEdit((prev) => !prev);
     if (!isEdit && Object.keys(runValidation()).length === 0) {
