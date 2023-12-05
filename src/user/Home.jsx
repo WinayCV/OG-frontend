@@ -1,6 +1,11 @@
 import Footer from './footer';
 import background from '../assets/background.png';
+import {useNavigate} from 'react-router-dom';
 export const Home = () => {
+  const navigate = useNavigate();
+  const handleStartBidding = () => {
+    navigate('/bid');
+  };
   return (
     <div>
       <div
@@ -25,7 +30,7 @@ export const Home = () => {
 
               <a
                 className="btn btn-outline-light btn-lg"
-                href="/bid"
+                onClick={handleStartBidding}
                 role="button"
               >
                 Start Bidding
