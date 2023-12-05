@@ -41,7 +41,7 @@ export const AuctionList = () => {
   return (
     <div>
       <h2>AuctionList</h2>
-      {artworks.myAuctions.length == 0 && (
+      {artworks?.myAuctions.length == 0 && (
         <span>
           No auctions created{' '}
           <Button
@@ -61,7 +61,7 @@ export const AuctionList = () => {
       )}
       {
         <ListGroup as="ol" numbered>
-          {artworks.myAuctions.map((auction) => {
+          {artworks?.myAuctions.map((auction) => {
             const isOpen = openArtworks[auction._id] || false;
             return (
               <ListGroup.Item
