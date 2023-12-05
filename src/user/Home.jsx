@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 export const Home = () => {
   const navigate = useNavigate();
   const handleStartBidding = () => {
-    navigate('/bid');
+    navigate('/exibition/list');
   };
   return (
     <div>
