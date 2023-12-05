@@ -25,7 +25,7 @@ export const Home = () => {
 
               <a
                 className="btn btn-outline-light btn-lg"
-                href="https://onlinegallery-be.onrender.com/exibition/list"
+                href="/bid"
                 role="button"
               >
                 Start Bidding
