@@ -31,7 +31,6 @@ export const loginCall = async (usersDispatch, artworksDispatch) => {
           authorization: localStorage.getItem('token'),
         },
       });
-
       usersDispatch({
         type: 'SET_USER',
         payload: response.data.user,
