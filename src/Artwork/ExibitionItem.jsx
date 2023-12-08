@@ -11,7 +11,6 @@ export const ExibitionItem = (props) => {
   const {artwork, handleShow} = props;
   const navigate = useNavigate();
   const location = useLocation();
-
   const handleBid = (id, str, auctionId) => {
     if (localStorage.getItem('token') && str == 'regular') {
       navigate(`/exibition/${id}`);
@@ -68,7 +67,14 @@ export const ExibitionItem = (props) => {
             artworkId={artwork._id}
           />
         </span>
-
+        <p
+          className="position-absolute top-0 start-0 rounded-pill p-1 px-2 m-2"
+          style={{backgroundColor: '#FFDAB9'}}
+        >
+          {artwork.type == 'regular'
+            ? 'Canvas Countdown'
+            : 'Flash sale'}
+        </p>
         <img
           src={artwork.images[0].url}
           className="card-img-top"
@@ -80,14 +86,6 @@ export const ExibitionItem = (props) => {
         />
         <div className="card-body">
           <h5 className="card-title mb-3">{artwork.title}</h5>
-          <p
-            className="position-absolute top-0 start-0 rounded-pill p-1 px-2 m-2"
-            style={{backgroundColor: '#FFDAB9'}}
-          >
-            {artwork.type == 'regular'
-              ? 'Canvas Countdown'
-              : 'Flash sale'}
-          </p>
           <p>{artwork.description}</p>
           <div className="d-flex align-items-center justify-content-center">
             <p className="card-text mb-0 mr-2">
@@ -111,7 +109,10 @@ export const ExibitionItem = (props) => {
                       }
                     : ''
                 }
-                disabled={new Date(artwork.end) < new Date()}
+                disabled={
+                  new Date(artwork.end) < new Date() ||
+                  new Date(artwork.start) > new Date()
+                }
                 className="rounded-pill"
               >
                 Bid
@@ -126,7 +127,10 @@ export const ExibitionItem = (props) => {
                     artwork.auction
                   );
                 }}
-                disabled={new Date(artwork.end) < new Date()}
+                disabled={
+                  new Date(artwork.end) < new Date() ||
+                  new Date(artwork.start) > new Date()
+                }
                 className="rounded-pill"
               >
                 Go Bid
