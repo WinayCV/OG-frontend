@@ -52,7 +52,7 @@ export const CountDown = (props) => {
     >
       {new Date(auctionStart) > new Date() ? (
         <span>
-          {/* Get ready to bid in: */}
+          Get ready to bid in:
           <Countdown
             date={new Date(auctionStart)}
             renderer={renderer}
@@ -60,7 +60,7 @@ export const CountDown = (props) => {
         </span>
       ) : (
         <span>
-          {/* Time running out: */}
+          Time running out:
           <Countdown
             date={new Date(auctionEnd)}
             renderer={renderer}
