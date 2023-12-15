@@ -95,8 +95,21 @@ export const loginCall = async (usersDispatch, artworksDispatch) => {
     } catch (error) {
       console.log(error);
     }
+    try {
+      const auctionResponse = await axios.get(
+        `/og/auction/active?type=live`
+      );
+      artworksDispatch({
+        type: 'SET_EXIBITION',
+        payload: auctionResponse.data,
+      });
+      console.log(auctionResponse.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
+
 export const AllContext = createContext();
 function App() {
   const dispatch = useDispatch();
@@ -131,7 +144,7 @@ function App() {
       }
     })();
   }, []);
-
+  console.log(artworks);
   return (
     <AllContext.Provider
       value={{

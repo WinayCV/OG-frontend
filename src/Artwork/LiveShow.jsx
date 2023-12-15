@@ -7,9 +7,9 @@ import io from 'socket.io-client';
 import {AllContext} from '../App';
 import {ExibitionList} from './ExibitionList';
 import {loginCall} from '../App';
+import axios from '../config/axios';
 export const LiveShow = () => {
   const [socket, setSocket] = useState(null);
-
   useEffect(() => {
     if (localStorage.getItem('token')) {
       const newSocket = io.connect(
@@ -35,6 +35,7 @@ export const LiveShow = () => {
     useContext(AllContext);
   const [artworkId, setArtworkId] = useState('');
   const userId = jwtDecode(localStorage.getItem('token')).id;
+
   const liveArtworks = artworks.data.filter(
     (auction) => auction.auction == id
   );
@@ -70,6 +71,20 @@ export const LiveShow = () => {
   });
 
   useEffect(() => {
+    (async () => {
+      try {
+        const auctionResponse = await axios.get(
+          `/og/auction/active?type=live`
+        );
+        artworksDispatch({
+          type: 'SET_EXIBITION',
+          payload: auctionResponse.data,
+        });
+        console.log(auctionResponse.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
     if (socket) {
       setReloadComponent((prev) => !prev);
       socket.on('connect', () => {

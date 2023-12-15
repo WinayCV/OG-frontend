@@ -37,7 +37,7 @@ export const AuctionList = () => {
       }
     })();
   }, []);
-
+  console.log(artworks.myAuctions);
   return (
     <div>
       <h2>AuctionList</h2>
@@ -61,7 +61,7 @@ export const AuctionList = () => {
       )}
       {
         <ListGroup as="ol" numbered>
-          {artworks?.myAuctions.map((auction) => {
+          {artworks?.myAuctions?.map((auction) => {
             const isOpen = openArtworks[auction._id] || false;
             return (
               <ListGroup.Item
