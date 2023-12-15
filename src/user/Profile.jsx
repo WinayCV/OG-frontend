@@ -110,7 +110,7 @@ export const Profile = () => {
       }
     }
   };
-
+  console.log(users?.data);
   return (
     <div>
       <ToastContainer />

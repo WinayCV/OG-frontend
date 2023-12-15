@@ -3,13 +3,11 @@ import axios from '../config/axios';
 export const startGetAddress = () => {
   return async (dispatch) => {
     try {
-      console.log('object');
       const addressResponse = await axios.get('/og/address/list', {
         headers: {
           Authorization: localStorage.getItem('token'),
         },
       });
-      console.log(addressResponse);
       dispatch(setMyAddress(addressResponse.data));
     } catch (error) {
       console.log(error);
