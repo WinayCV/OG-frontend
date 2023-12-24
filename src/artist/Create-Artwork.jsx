@@ -106,9 +106,16 @@ export const CreateArtwork = () => {
         setLoading(false);
         navigate('/artworkList');
       } catch (error) {
-        console.log({error});
+        console.log(error.response.data.error);
+        if (
+          error.response.data.error ==
+          'Unsupported MIME type: application/pdf'
+        ) {
+          newErrors.images = 'Please select valid image';
+        }
+        setErrors(newErrors);
         setLoading(false);
-        alert(error.response.data.error);
+        // alert(error.response.data.error);
       }
     }
   };
@@ -278,6 +285,8 @@ export const CreateArtwork = () => {
                     allowMultiple={true}
                     maxFiles={3}
                     name="files"
+                    maxFileSize="5MB"
+                    acceptedFileTypes={['image/*']}
                     labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
                   />
                 </div>
