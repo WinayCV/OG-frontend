@@ -132,7 +132,9 @@ export const Profile = () => {
                 <Col sm="10">
                   <Form.Control
                     type="text"
-                    value={firstName}
+                    value={
+                      firstName ? firstName : users?.data?.firstName
+                    }
                     name="firstName"
                     disabled={isEdit}
                     onChange={(e) => setFirstName(e.target.value)}
@@ -172,7 +174,9 @@ export const Profile = () => {
                   <Form.Control
                     type="number"
                     name="mobileNum"
-                    value={mobileNum}
+                    value={
+                      mobileNum ? mobileNum : users?.data?.mobileNum
+                    }
                     disabled={isEdit}
                     onChange={(e) => setMobileNum(e.target.value)}
                   />

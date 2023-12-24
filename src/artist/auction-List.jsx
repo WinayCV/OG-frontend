@@ -37,7 +37,7 @@ export const AuctionList = () => {
       }
     })();
   }, []);
-  console.log(artworks.myAuctions);
+
   return (
     <div>
       <h2>AuctionList</h2>

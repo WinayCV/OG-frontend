@@ -45,7 +45,7 @@ export const CreateAuction = () => {
     const selectedArtwork = artworks?.myArtworks.find(
       (artwork) => artwork.title === selectedTitle
     );
-    console.log(selectedArtwork);
+
     if (selectedArtwork) {
       setSelectArtwork(selectedArtwork);
       const selectedLabel = selectedArtwork?._id;
@@ -77,6 +77,9 @@ export const CreateAuction = () => {
     if (form.auctionType == '') {
       newErrors.auctionType = 'Please select auction type';
     }
+    if (form.artworks.length == 0) {
+      newErrors.artworks = 'Please select artworks';
+    }
     if (form.artworks.length == 0 && form.auctionType == 'regular') {
       newErrors.artworks = 'Please select artworks';
     }
@@ -88,10 +91,10 @@ export const CreateAuction = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault(e);
+
     if (isEmpty(runValidation())) {
-      console.log(form);
       try {
-        const auctionResponse = await axios.post(
+        const createNewAuction = await axios.post(
           'og/auction/create',
           form,
           {
@@ -100,6 +103,11 @@ export const CreateAuction = () => {
             },
           }
         );
+        const auctionResponse = await axios.get('/og/myauction', {
+          headers: {
+            authorization: localStorage.getItem('token'),
+          },
+        });
         artworksDispatch({
           type: 'SET_MY_AUCTIONS',
           payload: auctionResponse.data,
@@ -280,8 +288,8 @@ export const CreateAuction = () => {
                     className="invalid-feedback"
                     style={{
                       position: 'absolute',
-                      bottom: '-1.5em',
-                      right: '-35%',
+                      // bottom: '-1.5em',
+                      // right: '-35%',
                     }}
                   >
                     {errors.artworks}

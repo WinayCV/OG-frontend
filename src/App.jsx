@@ -103,7 +103,6 @@ export const loginCall = async (usersDispatch, artworksDispatch) => {
         type: 'SET_EXIBITION',
         payload: auctionResponse.data,
       });
-      console.log(auctionResponse.data);
     } catch (error) {
       console.log(error);
     }
@@ -144,7 +143,7 @@ function App() {
       }
     })();
   }, []);
-  console.log(artworks);
+
   return (
     <AllContext.Provider
       value={{

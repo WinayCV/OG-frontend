@@ -34,6 +34,7 @@ const SearchPage = ({handleSort}) => {
             type: 'SET_EXIBITION',
             payload: auctionResponse.data,
           });
+          console.log(auctionResponse);
         } catch (error) {
           console.log(error);
         }
