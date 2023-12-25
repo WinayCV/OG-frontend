@@ -53,17 +53,17 @@ export const loginCall = async (usersDispatch, artworksDispatch) => {
       console.log(error);
     }
   }
-  try {
-    const auctionResponse = await axios.get(
-      `/og/auction/exhibition?page=${0}&sort=${-1}`
-    );
-    artworksDispatch({
-      type: 'SET_EXIBITION',
-      payload: auctionResponse.data,
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  // try {
+  //   const auctionResponse = await axios.get(
+  //     `/og/auction/exhibition?page=${0}&sort=${-1}`
+  //   );
+  //   artworksDispatch({
+  //     type: 'SET_EXIBITION',
+  //     payload: auctionResponse.data,
+  //   });
+  // } catch (error) {
+  //   console.log(error);
+  // }
 
   if (
     localStorage.getItem('token') &&
@@ -95,17 +95,17 @@ export const loginCall = async (usersDispatch, artworksDispatch) => {
     } catch (error) {
       console.log(error);
     }
-    try {
-      const auctionResponse = await axios.get(
-        `/og/auction/active?type=live`
-      );
-      artworksDispatch({
-        type: 'SET_EXIBITION',
-        payload: auctionResponse.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const auctionResponse = await axios.get(
+    //     `/og/auction/active?type=live`
+    //   );
+    //   artworksDispatch({
+    //     type: 'SET_EXIBITION',
+    //     payload: auctionResponse.data,
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
 };
 
