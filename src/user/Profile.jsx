@@ -24,10 +24,10 @@ export const Profile = () => {
   const [info, setInfo] = useState(
     isEdit ? address[address.length - 1]?.address : ''
   );
-
-  const [firstName, setFirstName] = useState(users.data.firstName);
-  const [mobileNum, setMobileNum] = useState(users.data.mobileNum);
-
+  console.log(users);
+  const [firstName, setFirstName] = useState(users?.data?.firstName);
+  const [mobileNum, setMobileNum] = useState(users?.data?.mobileNum);
+  console.log(users?.data?.mobileNum);
   useEffect(() => {
     (async () => {
       if (localStorage.getItem('token')) {
@@ -62,6 +62,9 @@ export const Profile = () => {
     if (mobileNum == '') {
       newErrors.mobileNum = 'Number cannot be empty';
     }
+    if (mobileNum?.length < 10) {
+      newErrors.mobileNum = 'Invlaid Number';
+    }
     setErrors(newErrors);
     return newErrors;
   };
@@ -80,13 +83,13 @@ export const Profile = () => {
   };
 
   const handleEdit = async () => {
-    setIsEdit((prev) => !prev);
+    setIsEdit(false);
     if (!isEdit && Object.keys(runValidation()).length === 0) {
       const formData = {
-        firstName,
-        mobileNum,
+        firstName: firstName ? firstName : users?.data?.firstName,
+        mobileNum: mobileNum ? mobileNum : users?.data?.mobileNum,
       };
-
+      console.log(formData);
       try {
         const profileResponse = await axios.put(
           '/og/editProfile',
@@ -105,12 +108,13 @@ export const Profile = () => {
         toast.success('Profile details saved sucessfull', {
           position: toast.POSITION.TOP_CENTER,
         });
+        setIsEdit(true);
       } catch (error) {
         console.log(error);
       }
     }
   };
-  console.log(users?.data);
+
   return (
     <div>
       <ToastContainer />

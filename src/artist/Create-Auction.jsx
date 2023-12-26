@@ -140,7 +140,7 @@ export const CreateAuction = () => {
       }
     }
   };
-
+  console.log(errors);
   return (
     <>
       <ToastContainer />
@@ -294,14 +294,13 @@ export const CreateAuction = () => {
                     isClearable
                   />
                 )}
-
                 {errors.artworks && (
                   <div
                     className="invalid-feedback"
                     style={{
                       position: 'absolute',
-                      // bottom: '-1.5em',
-                      // right: '-35%',
+                      bottom: '-1.5em',
+                      right: '-35%',
                     }}
                   >
                     {errors.artworks}
