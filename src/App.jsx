@@ -143,7 +143,7 @@ function App() {
       }
     })();
   }, []);
-
+  console.log(artworks);
   return (
     <AllContext.Provider
       value={{

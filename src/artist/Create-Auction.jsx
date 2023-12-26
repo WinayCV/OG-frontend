@@ -103,14 +103,14 @@ export const CreateAuction = () => {
             },
           }
         );
-        const auctionResponse = await axios.get('/og/myauction', {
+        const myAuctionResponse = await axios.get('/og/myauction', {
           headers: {
             authorization: localStorage.getItem('token'),
           },
         });
         artworksDispatch({
           type: 'SET_MY_AUCTIONS',
-          payload: auctionResponse.data,
+          payload: myAuctionResponse.data,
         });
         setForm({
           auctionStart: '',
@@ -118,6 +118,18 @@ export const CreateAuction = () => {
           auctionEnd: '',
           artworks: [],
         });
+        try {
+          const auctionResponse = await axios.get(
+            `/og/auction/active?type=live`
+          );
+          artworksDispatch({
+            type: 'SET_EXIBITION',
+            payload: auctionResponse.data,
+          });
+          console.log(auctionResponse.data);
+        } catch (error) {
+          console.log(error);
+        }
         setErrors({});
         toast.success('Auction created sucessfully', {
           position: toast.POSITION.TOP_CENTER,

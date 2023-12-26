@@ -23,11 +23,11 @@ const NavBar = () => {
   const navigateLogin = async (e, str) => {
     e.preventDefault();
     if (localStorage.getItem('token') && str == 'regular') {
-      console.log(str);
       try {
         const auctionResponse = await axios.get(
           `/og/auction/active?type=${str}`
         );
+        console.log(auctionResponse.data);
         artworksDispatch({
           type: 'SET_EXIBITION',
           payload: auctionResponse.data,
@@ -43,6 +43,7 @@ const NavBar = () => {
         const auctionResponse = await axios.get(
           `/og/auction/exhibition?page=${0}&sort=${-1}`
         );
+        console.log('here');
         artworksDispatch({
           type: 'SET_EXIBITION',
           payload: auctionResponse.data,

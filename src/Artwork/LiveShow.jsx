@@ -60,7 +60,6 @@ export const LiveShow = () => {
   };
   const handleShow = (artworkId, bid, auctionId) => {
     setArtworkId(artworkId);
-
     setShow((prev) => !prev);
   };
 
