@@ -1,6 +1,7 @@
 import {useContext, useState} from 'react';
 import axios from '../config/axios';
 import {useNavigate} from 'react-router-dom';
+import {Spinner} from 'react-bootstrap';
 import {AllContext} from '../App';
 import {loginCall} from '../App';
 import {useDispatch} from 'react-redux';
@@ -9,6 +10,7 @@ import Footer from './footer';
 
 export const Login = () => {
   const {usersDispatch, artworksDispatch} = useContext(AllContext);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: '',
@@ -35,6 +37,7 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (Object.keys(runValidation()).length === 0) {
+      setLoading(true);
       try {
         const response = await axios.post('/og/login', form);
         localStorage.setItem('token', response.data.token);
@@ -43,6 +46,7 @@ export const Login = () => {
           payload: response.data.user,
         });
         loginCall(usersDispatch, artworksDispatch);
+        setLoading(false);
         dispatch(startGetAddress());
         navigate('/');
         setErrors({});
@@ -73,6 +77,27 @@ export const Login = () => {
         onSubmit={handleSubmit}
         className="d-flex align-items-center flex-column"
       >
+        {loading && (
+          <div
+            className="position-fixed top-0 start-0 w-100 h-100"
+            style={{
+              background: 'rgba(255, 255, 255, 0.8)',
+              backdropFilter: 'blur(5px)',
+              zIndex: 1000,
+            }}
+          />
+        )}
+
+        {loading && (
+          <div
+            className="position-absolute top-50 start-50 translate-middle"
+            style={{
+              zIndex: 1001,
+            }}
+          >
+            <Spinner animation="border" size="lg" />
+          </div>
+        )}
         <div className="input-group flex-nowrap">
           <span className="input-group-text" id="addon-wrapping">
             Email
