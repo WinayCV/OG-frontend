@@ -3,6 +3,7 @@ import {Button} from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import {Spinner} from 'react-bootstrap';
 import {AllContext} from '../App';
 import axios from '../config/axios';
 import SearchPage from '../config/searchBar';
@@ -11,6 +12,7 @@ import {useNavigate} from 'react-router-dom';
 
 export const Exibition = () => {
   const {artworks, artworksDispatch} = useContext(AllContext);
+  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [sort, setSort] = useState(1);
   const navigate = useNavigate();
@@ -32,6 +34,7 @@ export const Exibition = () => {
   };
   useEffect(() => {
     (async () => {
+      setLoading(true);
       try {
         const auctionResponse = await axios.get(
           `/og/auction/exhibition?page=${page}&sort=${sort}`
@@ -40,6 +43,7 @@ export const Exibition = () => {
           type: 'SET_EXIBITION',
           payload: auctionResponse.data,
         });
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -57,7 +61,7 @@ export const Exibition = () => {
           xl={3}
           className="g-4 justify-content-center"
         >
-          {artworks.length != 0 &&
+          {artworks.length != 0 ? (
             artworks?.data.map((artwork) => (
               <Col
                 key={artwork._id}
@@ -69,7 +73,20 @@ export const Exibition = () => {
                   handleShow={handleShow}
                 />
               </Col>
-            ))}
+            ))
+          ) : (
+            <Spinner animation="border" size="lg" />
+          )}
+          {loading && (
+            <div
+              className="position-absolute top-50 start-50 translate-middle"
+              style={{
+                zIndex: 1001,
+              }}
+            >
+              <Spinner animation="border" size="lg" />
+            </div>
+          )}
         </Row>
         {artworks.data.length > 6 ? (
           ''
