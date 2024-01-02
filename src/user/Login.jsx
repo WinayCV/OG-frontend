@@ -79,7 +79,9 @@ export const Login = () => {
           </span>
           <input
             type="text"
-            className="form-control"
+            className={`form-control ${
+              errors.email ? 'is-invalid' : ''
+            }`}
             placeholder="example@gmail.com"
             aria-label="Email"
             aria-describedby="addon-wrapping"
@@ -87,19 +89,19 @@ export const Login = () => {
             value={form.email}
             onChange={handleChange}
           />
-          <span>
-            {errors.email && (
-              <p style={{color: 'red'}}>{errors.email}</p>
-            )}
-          </span>
         </div>
+        {errors.email && (
+          <div className="text-danger mt-1">{errors.email}</div>
+        )}
         <div className="input-group flex-nowrap mt-3">
           <span className="input-group-text" id="addon-wrapping">
             Password
           </span>
           <input
             type="password"
-            className="form-control"
+            className={`form-control ${
+              errors.password ? 'is-invalid' : ''
+            }`}
             aria-label="Password"
             aria-describedby="addon-wrapping"
             name="password"
@@ -107,13 +109,11 @@ export const Login = () => {
             placeholder="Password"
             onChange={handleChange}
           />
-          <span>
-            {errors.password && (
-              <p style={{color: 'red'}}>{errors.password}</p>
-            )}
-          </span>
         </div>
-        <button type="submit" className="btn btn-primary  mt-3">
+        {errors.password && (
+          <div className="text-danger mt-1">{errors.password}</div>
+        )}
+        <button type="submit" className="btn btn-primary mt-3">
           Submit
         </button>
       </form>
