@@ -382,3 +382,129 @@ function CustomerProfile() {
 }
 
 export default CustomerProfile
+
+
+<div className="input-group flex-nowrap mb-3">
+  <span className="input-group-text" id="addon-wrapping">
+    Auction start date
+  </span>
+  <div style={{ position: 'relative', width: '100%' }}>
+    <input
+      type="datetime-local"
+      className={`form-control col-12 ${
+        errors.auctionStart && 'is-invalid'
+      }`}
+      style={{ width: '100%' }}
+      aria-label="auctionStart"
+      aria-describedby="addon-wrapping"
+      name="auctionStart"
+      value={form.auctionStart}
+      onChange={handleChange}
+    />
+    {errors.auctionStart && (
+      <div className="invalid-feedback">
+        {errors.auctionStart}
+      </div>
+    )}
+  </div>
+</div>
+
+<div className="input-group flex-nowrap mt-3 mb-3">
+  <span className="input-group-text" id="addon-wrapping">
+    Auction end date
+  </span>
+  <div style={{ position: 'relative', width: '100%' }}>
+    <input
+      type="datetime-local"
+      className={`form-control col-12 ${
+        errors.auctionEnd && 'is-invalid'
+      }`}
+      aria-label="auctionEnd"
+      aria-describedby="addon-wrapping"
+      name="auctionEnd"
+      value={form.auctionEnd}
+      onChange={handleChange}
+    />
+    {errors.auctionEnd && (
+      <div className="invalid-feedback">
+        {errors.auctionEnd}
+      </div>
+    )}
+  </div>
+</div>
+
+<div className="input-group flex-nowrap mt-3 mb-3">
+  <span className="input-group-text" id="addon-wrapping">
+    Artworks
+  </span>
+  <div style={{ position: 'relative', width: '100%' }}>
+   <div style={{position: 'relative', width: '100%'}}>
+                {form.auctionType == 'regular' ? (
+                  <DropdownButton
+                    id="dropdown-basic-button"
+                    title={
+                      selectArtwork && selectArtwork._id
+                        ? selectArtwork.title
+                        : 'Select Artwork'
+                    }
+                    onSelect={handleArtworkTitleSelect}
+                  >
+                    <Dropdown.Item eventKey="">
+                      Select Artwork
+                    </Dropdown.Item>
+                    {artworks?.myArtworks
+                      .filter((ele) => isEmpty(ele.auction))
+                      .map((artwork) => (
+                        <Dropdown.Item
+                          key={artwork._id}
+                          eventKey={artwork.title}
+                        >
+                          {artwork.title}
+                        </Dropdown.Item>
+                      ))}
+                  </DropdownButton>
+                ) : (
+                  <CreatableSelect
+                    isMulti
+                    // Update the options prop with the actual options for artworks
+                    options={options}
+                    className={`form-control col-12 ${
+                      errors.auctionEnd && 'is-invalid'
+                    }`}
+                    value={form.artworks.map((id) => ({
+                      value: id,
+                      label:
+                        artworks?.myArtworks.find(
+                          (artwork) => artwork._id === id
+                        )?.title || '',
+                    }))}
+                    onChange={handleArtworksChange}
+                    placeholder="Select Artworks"
+                    isSearchable
+                    isClearable
+                  />
+                )}
+                {errors.artworks && (
+                  <div
+                    className="invalid-feedback"
+                    style={{
+                      position: 'absolute',
+                      bottom: '-1.5em',
+                      right: '-35%',
+                    }}
+                  >
+                    {errors.artworks}
+                  </div>
+                )}
+              </div>
+    {errors.artworks && (
+      <div className="invalid-feedback">
+        {errors.artworks}
+      </div>
+    )}
+  </div>
+</div>
+
+<button type="submit" className="btn btn-primary mt-3">
+  Create
+</button>

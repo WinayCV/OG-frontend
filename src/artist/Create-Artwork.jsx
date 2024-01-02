@@ -38,8 +38,7 @@ export const CreateArtwork = () => {
       newErrors.description = 'Description cannot be empty';
     }
     if (selectedTag.length < 2) {
-      newErrors.searchTag =
-        'Minimum 2 tags required,it makes your painting more accessable';
+      newErrors.searchTag = 'Minimum 2 tags required';
     }
     if (files.length < 3) {
       newErrors.images = 'Minimum 3 images required';
@@ -171,7 +170,7 @@ export const CreateArtwork = () => {
                     style={{
                       position: 'absolute',
                       bottom: '-1.5em',
-                      right: '-35%',
+                      right: '5%',
                     }}
                   >
                     {errors.title}
@@ -204,7 +203,7 @@ export const CreateArtwork = () => {
                     style={{
                       position: 'absolute',
                       bottom: '-1.5em',
-                      right: '-29%',
+                      right: '15%',
                     }}
                   >
                     {errors.currentBidAmount}
@@ -232,7 +231,7 @@ export const CreateArtwork = () => {
                     style={{
                       position: 'absolute',
                       bottom: '-1.5em',
-                      right: '-30%',
+                      right: '10%',
                     }}
                   >
                     {errors.description}
@@ -262,7 +261,7 @@ export const CreateArtwork = () => {
                     style={{
                       position: 'absolute',
                       bottom: '-1.5em',
-                      right: '-10%',
+                      right: '15%',
                     }}
                   >
                     {errors.searchTag}
@@ -296,7 +295,7 @@ export const CreateArtwork = () => {
                     style={{
                       position: 'absolute',
                       bottom: '-1.5em',
-                      right: '-35%',
+                      right: '0%',
                     }}
                   >
                     {errors.images}

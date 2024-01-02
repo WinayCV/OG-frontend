@@ -72,7 +72,7 @@ export const CreateAuction = () => {
     if (form.auctionStart == '') {
       newErrors.auctionStart = 'Please enter valid date';
     } else if (new Date(form.auctionStart) < new Date()) {
-      newErrors.auctionStart = 'End date cannot be less than today';
+      newErrors.auctionStart = 'Start date cannot be less than today';
     }
     if (form.auctionType == '') {
       newErrors.auctionType = 'Please select auction type';
@@ -205,7 +205,7 @@ export const CreateAuction = () => {
                     style={{
                       position: 'absolute',
                       bottom: '-1.5em',
-                      right: '-35%',
+                      right: '0%',
                     }}
                   >
                     {errors.auctionStart}
@@ -236,7 +236,7 @@ export const CreateAuction = () => {
                     style={{
                       position: 'absolute',
                       bottom: '-1.5em',
-                      right: '-35%',
+                      right: '0%',
                     }}
                   >
                     {errors.auctionEnd}
@@ -298,9 +298,9 @@ export const CreateAuction = () => {
                   <div
                     className="invalid-feedback"
                     style={{
-                      position: 'absolute',
+                      // position: 'absolute',
                       bottom: '-1.5em',
-                      right: '-35%',
+                      right: '0%',
                     }}
                   >
                     {errors.artworks}
