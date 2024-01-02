@@ -79,7 +79,6 @@ export const LiveShow = () => {
           type: 'SET_EXIBITION',
           payload: auctionResponse.data,
         });
-        console.log(auctionResponse.data);
       } catch (error) {
         console.log(error);
       }
@@ -111,11 +110,14 @@ export const LiveShow = () => {
           (artwork) => artwork._id == bidResponse.artworkId
         ).currentBidAmount;
 
-        const artworkName = artworks?.data?.find((artwork) => {
-          return artwork._id == bidResponse.artworkId;
-        })?.title;
+        const artworkName = bidResponse.auction.artworks.find(
+          (artwork) => {
+            return artwork._id == bidResponse.artworkId;
+          }
+        )?.title;
+
         toast.info(
-          `${bidResponse.biddedUser.firstName} bidded ₹${updatedBid} on ${artworkName}`,
+          `${bidResponse.biddedUser.firstName} bidded ₹${updatedBid} on "${artworkName}"`,
           {
             position: toast.POSITION.TOP_CENTER,
           }

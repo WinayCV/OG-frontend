@@ -24,10 +24,10 @@ export const Profile = () => {
   const [info, setInfo] = useState(
     isEdit ? address[address.length - 1]?.address : ''
   );
-  console.log(users);
+
   const [firstName, setFirstName] = useState(users?.data?.firstName);
   const [mobileNum, setMobileNum] = useState(users?.data?.mobileNum);
-  console.log(users?.data?.mobileNum);
+
   useEffect(() => {
     (async () => {
       if (localStorage.getItem('token')) {
@@ -38,6 +38,7 @@ export const Profile = () => {
               authorization: localStorage.getItem('token'),
             },
           });
+          console.log(response.data);
           usersDispatch({
             type: 'SET_USER',
             payload: response.data.user,
@@ -89,7 +90,7 @@ export const Profile = () => {
         firstName: firstName ? firstName : users?.data?.firstName,
         mobileNum: mobileNum ? mobileNum : users?.data?.mobileNum,
       };
-      console.log(formData);
+
       try {
         const profileResponse = await axios.put(
           '/og/editProfile',

@@ -5,7 +5,7 @@ import {ExibitionItem} from './ExibitionItem';
 
 export const ExibitionList = (props) => {
   const {artworks, handleShow} = props;
-  console.log(artworks);
+
   return (
     <div>
       <Container className="container pt-3 mx-auto text-center">
